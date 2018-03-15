@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Blog : http://jojoldu.tistory.com
  * Github : https://github.com/jojoldu
  */
-
 public class CalculatorTest {
 
     @Test
