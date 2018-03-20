@@ -59,7 +59,7 @@ bintray {
     override = true
     pkg {
         repo = 'maven'
-        name = 'gradle-project'
+        name = 'Repo-Maven'
 	licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/hhbravo/gradle-travisci-coverall.git'
 	publicDownloadNumbers = true
