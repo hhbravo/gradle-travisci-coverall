@@ -4,11 +4,12 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+	    jcenter()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2'
-        	classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
 	}
 }
 
@@ -60,15 +61,15 @@ bintray {
     pkg {
         repo = 'maven'
         name = 'Repo-Maven'
-	licenses = ['Apache-2.0']
+		licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/hhbravo/gradle-travisci-coverall.git'
-	publicDownloadNumbers = true
-	version {
-		name = '1.0-Final'
-		desc = 'Demo project 1.0 final'
-		released  = new Date()
-		vcsTag = '1.0.0'
-		attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+		publicDownloadNumbers = true
+		version {
+			name = '1.0-Final'
+			desc = 'Demo project 1.0 final'
+			released  = new Date()
+			vcsTag = '1.0.0'
+			attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
 	    }
     }
     publications = ['MyPublication']
