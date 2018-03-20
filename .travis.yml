@@ -2,21 +2,19 @@ language: java
 jdk:
   - openjdk8
 
-branches:
-  only:
-    - master
-
-# Travis CI 서버의 Cache 활성화
 cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
+script: "./gradlew clean build bintrayUpload"
 
-# clean 후 Build (Build시 자동으로 test 수행)
-script: "./gradlew clean build"
+before_install:
+  - sudo apt-get install jq
+  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar https://oss.sonatype.org/service/local/repositories/releases/content/com/codacy/codacy-coverage-reporter/3.0.0/codacy-coverage-reporter-3.0.0-assembly.jar
 
 after_success:
-- ./gradlew jacocoTestReport coveralls
+  - ./gradlew jacocoTestReport
+  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml -t 73cc09f2f07a4bd08f0df7a5675946dc
 
 notifications:
-    webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
+    webhooks: https://gradle-travisci-coverall.herokuapp.com/notify
