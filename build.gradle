@@ -8,6 +8,7 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2'
+        	classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
 	}
 }
 
@@ -17,6 +18,8 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
 group = 'com.jojoldu'
 version = '0.0.1-SNAPSHOT'
@@ -36,4 +39,37 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+publishing {
+	publications {
+		MyPublication(MavenPublication) {
+			from components.java
+			groupId 'com.jojoldu'
+            		artifactId 'gradle-travisci-coverall'
+            		version '1.0'
+		}
+	}
+}
+
+bintray {
+    user = 'hhbravo'
+    key = '324a8ffde01508b18ef6fd81a82023eee489b395'
+    publish = true
+    override = true
+    pkg {
+        repo = 'maven'
+        name = 'gradle-project'
+	licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/hhbravo/gradle-travisci-coverall.git'
+	publicDownloadNumbers = true
+	version {
+		name = '1.0-Final'
+		desc = 'Demo project 1.0 final'
+		released  = new Date()
+		vcsTag = '1.0.0'
+		attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+	    }
+    }
+    publications = ['MyPublication']
 }
