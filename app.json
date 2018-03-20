@@ -1,5 +1,5 @@
 {
-  "name": "gradle-travisci-coverall-0",
+  "name": "gradle-travisci-coverall",
   "scripts": {  },
   "env": {  },
   "formation": {
